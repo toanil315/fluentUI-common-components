@@ -6,6 +6,7 @@ import {
   DatePicker,
   Input,
   ProviderTree,
+  Select,
   Textarea,
 } from './components';
 import { createProviderConfig } from './components/ProviderTree/ProviderTree';
@@ -33,8 +34,7 @@ const App = () => {
 const AppContainer = () => {
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
-
-  console.log('AppContainer render', inputValue);
+  const [selectValue, setSelectValue] = useState<string | undefined>(undefined);
 
   return (
     <div
@@ -137,6 +137,20 @@ const AppContainer = () => {
         >
           <Button>Click Me</Button>
         </OverflowMenu>
+      </div>
+      <div style={{ width: 300 }}>
+        <Select
+          label='Select'
+          required
+          placeholder='Select something...'
+          options={[
+            { value: 'jack', label: 'Jack' },
+            { value: 'lucy', label: 'Lucy' },
+            { value: 'Yiminghe', label: 'yiminghe' },
+          ]}
+          value={selectValue}
+          onChange={(value) => setSelectValue(value)}
+        />
       </div>
     </div>
   );

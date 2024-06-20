@@ -1,8 +1,14 @@
-import { makeResetStyles, makeStyles, shorthands, tokens } from '@fluentui/react-components';
+import {
+  makeResetStyles,
+  makeStyles,
+  shorthands,
+  textareaClassNames,
+  tokens,
+} from '@fluentui/react-components';
 
 export const useTextareaBaseStyles = makeResetStyles({
   borderRadius: tokens.borderRadiusMedium,
-  '& > textarea': {
+  [`&  .${textareaClassNames.textarea}`]: {
     ...shorthands.padding('0px'),
   },
 });
@@ -10,12 +16,24 @@ export const useTextareaBaseStyles = makeResetStyles({
 export const useTextareaStyles = makeStyles({
   textareaSmall: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalS),
+    [`& .${textareaClassNames.textarea}`]: {
+      fontSize: tokens.fontSizeBase300,
+      lineHeight: tokens.lineHeightBase300,
+    },
   },
   textareaMedium: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalM),
+    [`& .${textareaClassNames.textarea}`]: {
+      fontSize: tokens.fontSizeBase400,
+      lineHeight: tokens.lineHeightBase400,
+    },
   },
   textareaLarge: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalL),
+    [`& .${textareaClassNames.textarea}`]: {
+      fontSize: tokens.fontSizeBase500,
+      lineHeight: tokens.lineHeightBase500,
+    },
   },
   textareaError: {
     ...shorthands.borderColor(`${tokens.colorPaletteRedBackground3} !important`),

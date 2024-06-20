@@ -1,4 +1,5 @@
 import { makeResetStyles, makeStyles, shorthands, tokens } from '@fluentui/react-components';
+import { datePickerClassNames } from '@fluentui/react-datepicker-compat';
 
 export const useDatePickerBaseStyles = makeResetStyles({
   borderRadius: tokens.borderRadiusMedium,
@@ -11,12 +12,24 @@ export const useDatePickerBaseStyles = makeResetStyles({
 export const useDatePickerStyles = makeStyles({
   datePickerSmall: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalS),
+    [`& > input`]: {
+      fontSize: tokens.fontSizeBase300,
+      lineHeight: tokens.lineHeightBase300,
+    },
   },
   datePickerMedium: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalM),
+    [`& > input`]: {
+      fontSize: tokens.fontSizeBase400,
+      lineHeight: tokens.lineHeightBase400,
+    },
   },
   datePickerLarge: {
     ...shorthands.padding(tokens.spacingVerticalS, tokens.spacingHorizontalL),
+    [`& > input`]: {
+      fontSize: tokens.fontSizeBase500,
+      lineHeight: tokens.lineHeightBase500,
+    },
   },
   datePickerError: {
     ...shorthands.borderColor(`${tokens.colorPaletteRedBackground3} !important`),
