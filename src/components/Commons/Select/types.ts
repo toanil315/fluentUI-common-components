@@ -4,7 +4,8 @@ export type SelectSize = 'small' | 'medium' | 'large';
 
 export interface SelectOption {
   value?: string;
-  label?: React.ReactNode;
+  label?: string;
+  renderFunction?: (option: Omit<SelectOption, 'group'>) => React.ReactNode;
   disabled?: boolean;
   group?: {
     label: string;

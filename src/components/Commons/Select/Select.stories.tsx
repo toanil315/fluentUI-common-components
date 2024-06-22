@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Select } from '.';
 import { useState } from 'react';
 import { Persona } from '@fluentui/react-components';
+import { SelectOption } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Select> = {
@@ -34,7 +35,7 @@ export const Primary: Story = {
     options: [
       { value: 'jack', label: 'Jack' },
       { value: 'lucy', label: 'Lucy' },
-      { value: 'Yiminghe', label: 'yiminghe' },
+      { value: 'yiminghe', label: 'Yiminghe' },
     ],
   },
   render: (props) => {
@@ -131,6 +132,19 @@ export const MultiSelect: Story = {
   },
 };
 
+const renderFunction: SelectOption['renderFunction'] = (option) => {
+  return (
+    <Persona
+      avatar={{ color: 'colorful', 'aria-hidden': true }}
+      name={option.label}
+      presence={{
+        status: 'available',
+      }}
+      secondaryText='Available'
+    />
+  );
+};
+
 export const ComplexOptions: Story = {
   args: {
     label: 'Label',
@@ -139,43 +153,19 @@ export const ComplexOptions: Story = {
     placeholder: 'Select somethings...',
     options: [
       {
-        value: 'Katri Athokas',
-        label: (
-          <Persona
-            avatar={{ color: 'colorful', 'aria-hidden': true }}
-            name='Katri Athokas'
-            presence={{
-              status: 'available',
-            }}
-            secondaryText='Available'
-          />
-        ),
+        value: 'katri athokas',
+        label: 'Katri Athokas',
+        renderFunction,
       },
       {
-        value: 'Elvia Atkins',
-        label: (
-          <Persona
-            avatar={{ color: 'colorful', 'aria-hidden': true }}
-            name='Elvia Atkins'
-            presence={{
-              status: 'busy',
-            }}
-            secondaryText='Busy'
-          />
-        ),
+        value: 'elvia atkins',
+        label: 'Elvia Atkins',
+        renderFunction,
       },
       {
-        value: 'Cameron Evans',
-        label: (
-          <Persona
-            avatar={{ color: 'colorful', 'aria-hidden': true }}
-            name='Cameron Evans'
-            presence={{
-              status: 'away',
-            }}
-            secondaryText='Away'
-          />
-        ),
+        value: 'cameron evans',
+        label: 'Cameron Evans',
+        renderFunction,
       },
     ],
   },

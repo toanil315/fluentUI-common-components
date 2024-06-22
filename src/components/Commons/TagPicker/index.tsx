@@ -20,6 +20,7 @@ export const TagPicker = ({
   options,
   error,
   label,
+  required,
   value = [],
   onChange,
   ...restProps
@@ -106,6 +107,7 @@ export const TagPicker = ({
     <Field
       label={label}
       size={size}
+      required={required}
       {...(Boolean(error)
         ? {
             validationState: 'error',

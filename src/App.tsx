@@ -8,6 +8,8 @@ import {
   ProviderTree,
   Select,
   Textarea,
+  Toaster,
+  openToast,
 } from './components';
 import { createProviderConfig } from './components/ProviderTree/ProviderTree';
 import { FluentProvider } from '@fluentui/react-components';
@@ -151,6 +153,26 @@ const AppContainer = () => {
           value={selectValue}
           onChange={(value) => setSelectValue(value)}
         />
+      </div>
+      <div>
+        <Toaster />
+        <Button
+          onClick={() =>
+            openToast({
+              props: {
+                title: 'Toast title',
+                body: 'Toast body',
+                actions: <Button>Click me</Button>,
+                dismissable: true,
+              },
+              timeout: 1000,
+              position: 'top-end',
+              intent: 'success',
+            })
+          }
+        >
+          Make toast
+        </Button>
       </div>
     </div>
   );

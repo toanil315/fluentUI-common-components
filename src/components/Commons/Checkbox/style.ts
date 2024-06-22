@@ -3,6 +3,7 @@ import {
   makeResetStyles,
   makeStyles,
   tokens,
+  shorthands,
 } from '@fluentui/react-components';
 
 export const useCheckboxBaseStyles = makeResetStyles({
@@ -34,6 +35,14 @@ export const useCheckboxStyles = makeStyles({
     [`& .${checkboxClassNames.indicator}`]: {
       width: '20px',
       height: '20px',
+    },
+  },
+  error: {
+    [`& .${checkboxClassNames.indicator}`]: {
+      ...shorthands.borderColor(`${tokens.colorPaletteRedBackground3} !important`),
+      ':has(svg)': {
+        backgroundColor: `${tokens.colorPaletteRedBackground3} !important`,
+      },
     },
   },
 });

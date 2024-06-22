@@ -8,8 +8,6 @@ export const useTagPickerFilter = ({ query = '', options, value }: UseTagPickerF
     );
   };
 
-  console.log(query);
-
   return new Set(
     options
       .filter(filterFunction)

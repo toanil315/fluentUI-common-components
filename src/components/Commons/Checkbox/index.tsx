@@ -3,20 +3,30 @@ import { useCheckboxBaseStyles, useCheckboxGroupStyles, useCheckboxStyles } from
 import { CheckboxGroupProps, CheckboxProps } from './types';
 import { Fragment, useEffect, useState } from 'react';
 
-export const Checkbox = ({ size = 'medium', ...restProps }: CheckboxProps) => {
+export const Checkbox = ({ size = 'medium', error, ...restProps }: CheckboxProps) => {
   const checkboxBaseClassName = useCheckboxBaseStyles();
   const checkboxClassNames = useCheckboxStyles();
 
   return (
-    <FuiCheckbox
-      className={mergeClasses(
-        checkboxBaseClassName,
-        size === 'small' && checkboxClassNames.checkboxSmall,
-        size === 'medium' && checkboxClassNames.checkboxMedium,
-        size === 'large' && checkboxClassNames.checkboxLarge,
-      )}
-      {...restProps}
-    />
+    <Field
+      {...(Boolean(error?.trim())
+        ? {
+            validationState: 'error',
+            validationMessage: error,
+          }
+        : {})}
+    >
+      <FuiCheckbox
+        className={mergeClasses(
+          checkboxBaseClassName,
+          size === 'small' && checkboxClassNames.checkboxSmall,
+          size === 'medium' && checkboxClassNames.checkboxMedium,
+          size === 'large' && checkboxClassNames.checkboxLarge,
+          Boolean(error) && checkboxClassNames.error,
+        )}
+        {...restProps}
+      />
+    </Field>
   );
 };
 
@@ -28,6 +38,7 @@ Checkbox.Group = ({
   direction = 'row',
   label,
   required,
+  error,
 }: CheckboxGroupProps) => {
   const checkboxGroupClassNames = useCheckboxGroupStyles();
   const [internalValues, setInternalValues] = useState<Set<string>>(new Set(value || []));
@@ -50,14 +61,13 @@ Checkbox.Group = ({
     return items.map((item) => {
       return (
         <Fragment key={item.value}>
-          <Field>
-            <Checkbox
-              label={item.label}
-              size={size}
-              checked={internalValues.has(item.value)}
-              onChange={() => handleChange(item.value)}
-            />
-          </Field>
+          <Checkbox
+            label={item.label}
+            size={size}
+            checked={internalValues.has(item.value)}
+            onChange={() => handleChange(item.value)}
+            error={error ? ' ' : ''}
+          />
         </Fragment>
       );
     });
@@ -68,6 +78,12 @@ Checkbox.Group = ({
       size={size}
       label={label}
       required={required}
+      {...(Boolean(error)
+        ? {
+            validationState: 'error',
+            validationMessage: error,
+          }
+        : {})}
     >
       <div
         className={mergeClasses(

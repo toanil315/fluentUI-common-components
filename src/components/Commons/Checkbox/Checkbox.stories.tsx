@@ -32,6 +32,7 @@ export const Primary: Story = {
 };
 
 export const CheckboxGroup: Story = {
+  args: {},
   render: () => {
     return (
       <Checkbox.Group
@@ -43,7 +44,37 @@ export const CheckboxGroup: Story = {
         direction='column'
         onChange={(value) => console.log('onChange', value)}
         label='Checkbox Group'
+      />
+    );
+  },
+};
+
+export const Single: Story = {
+  render: () => {
+    return (
+      <Checkbox
+        onChange={(value) => console.log('onChange', value)}
+        label='Checkbox'
         required
+      />
+    );
+  },
+};
+
+export const Error: Story = {
+  args: {},
+  render: () => {
+    return (
+      <Checkbox.Group
+        items={[
+          { label: 'Checkbox 1', value: '1' },
+          { label: 'Checkbox 2', value: '2' },
+          { label: 'Checkbox 3', value: '3' },
+        ]}
+        direction='column'
+        onChange={(value) => console.log('onChange', value)}
+        label='Checkbox Group'
+        error='This is an error message'
       />
     );
   },

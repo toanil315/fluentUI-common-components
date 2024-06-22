@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { SelectProps } from './types';
 import {
   Combobox,
@@ -9,6 +8,7 @@ import {
   mergeClasses,
 } from '@fluentui/react-components';
 import { useSelectBaseStyles, useSelectStyles } from './style';
+import { useMemo } from 'react';
 
 export const Select = <T extends string | string[]>({
   label,
@@ -28,8 +28,12 @@ export const Select = <T extends string | string[]>({
       onChange && onChange(data.selectedOptions as T);
       return;
     }
-    onChange && onChange(data.optionText as T);
+    onChange && onChange(data.optionValue as T);
   };
+
+  const mapOptions = useMemo(() => {
+    return new Map(options.map((option) => [option.value, option]));
+  }, [options]);
 
   const renderOptions = () => {
     return options.map((option, index) => {
@@ -43,20 +47,19 @@ export const Select = <T extends string | string[]>({
               const alternativeKey = `${index}-${subIndex}`;
 
               return (
-                <Fragment key={subOption.value}>
-                  <Option
-                    className={mergeClasses(
-                      size === 'small' && selectClassNames.optionSmall,
-                      size === 'medium' && selectClassNames.optionMedium,
-                      size === 'large' && selectClassNames.optionLarge,
-                    )}
-                    text={subOption.value || alternativeKey}
-                    value={subOption.value || alternativeKey}
-                    disabled={subOption.disabled}
-                  >
-                    {subOption.label || 'Empty Label'}
-                  </Option>
-                </Fragment>
+                <Option
+                  className={mergeClasses(
+                    size === 'small' && selectClassNames.optionSmall,
+                    size === 'medium' && selectClassNames.optionMedium,
+                    size === 'large' && selectClassNames.optionLarge,
+                  )}
+                  text={subOption.value || alternativeKey}
+                  value={subOption.value || alternativeKey}
+                  key={subOption.value}
+                  disabled={subOption.disabled}
+                >
+                  {subOption.label || 'Empty Label'}
+                </Option>
               );
             })}
           </OptionGroup>
@@ -64,19 +67,19 @@ export const Select = <T extends string | string[]>({
       }
 
       return (
-        <Fragment key={option.value}>
-          <Option
-            className={mergeClasses(
-              size === 'small' && selectClassNames.optionSmall,
-              size === 'medium' && selectClassNames.optionMedium,
-              size === 'large' && selectClassNames.optionLarge,
-            )}
-            text={option.value || String(index)}
-            disabled={option.disabled}
-          >
-            {option.label || 'Empty Label'}
-          </Option>
-        </Fragment>
+        <Option
+          className={mergeClasses(
+            size === 'small' && selectClassNames.optionSmall,
+            size === 'medium' && selectClassNames.optionMedium,
+            size === 'large' && selectClassNames.optionLarge,
+          )}
+          text={option.label || String(index)}
+          value={option.value}
+          key={option.value}
+          disabled={option.disabled}
+        >
+          {option.renderFunction?.(option) || option.label || 'Empty Label'}
+        </Option>
       );
     });
   };
@@ -104,7 +107,9 @@ export const Select = <T extends string | string[]>({
         {...restProps}
         onOptionSelect={handleChange}
         selectedOptions={Array.isArray(value) ? value : [value || '']}
-        {...(restProps.multiselect && Array.isArray(value) ? { value: value.join(', ') } : {})}
+        {...(restProps.multiselect && Array.isArray(value)
+          ? { value: value.map((v) => mapOptions.get(v)?.label).join(', ') }
+          : { value: value ? mapOptions.get(value as string)?.label : '' })}
       >
         {renderOptions()}
       </Combobox>

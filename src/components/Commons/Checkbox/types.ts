@@ -4,6 +4,7 @@ export type CheckboxSize = 'small' | 'medium' | 'large';
 
 export interface CheckboxProps extends Omit<FuiCheckboxProps, 'size'> {
   size?: CheckboxSize;
+  error?: string;
 }
 
 export interface CheckboxGroupItem {
@@ -19,4 +20,5 @@ export interface CheckboxGroupProps {
   label?: string;
   required?: boolean;
   direction?: 'row' | 'column';
+  error?: string;
 }

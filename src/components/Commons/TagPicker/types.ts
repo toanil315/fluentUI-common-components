@@ -13,7 +13,8 @@ export interface TagPickerOptionItem {
   };
 }
 
-export interface TagPickerProps extends Omit<FuiTagPickerProps, 'value' | 'onChange' | 'size'> {
+export interface TagPickerProps
+  extends Omit<FuiTagPickerProps, 'value' | 'onChange' | 'size' | 'children'> {
   size?: TagPickerSize;
   label?: string;
   required?: boolean;
