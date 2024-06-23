@@ -7,15 +7,19 @@ import {
   Input,
   ProviderTree,
   Select,
+  Table,
+  TableColumn,
   Textarea,
   Toaster,
   openToast,
 } from './components';
 import { createProviderConfig } from './components/ProviderTree/ProviderTree';
-import { FluentProvider } from '@fluentui/react-components';
+import { FluentProvider, createTableColumn } from '@fluentui/react-components';
 import { lightTheme } from './styles/theme';
 import { useState } from 'react';
 import { OverflowMenu } from './components/Commons/OverflowMenu';
+import { useTable } from './hooks';
+import { DEFAULT_LIMIT, SORT_ORDER_ENUM } from './constants';
 
 const App = () => {
   // Please define your providers and their configurations here
@@ -33,10 +37,78 @@ const App = () => {
   );
 };
 
+interface Item {
+  id: string;
+  name: string;
+  age: number;
+  address: string;
+}
+
+const dataSource: Item[] = [
+  {
+    id: '1',
+    name: 'Mike',
+    age: 32,
+    address: '10 Downing Street',
+  },
+  {
+    id: '2',
+    name: 'John',
+    age: 42,
+    address: '11 Downing Street',
+  },
+];
+
+const columns: TableColumn<Item>[] = [
+  {
+    title: 'Name',
+    definition: createTableColumn<Item>({
+      columnId: 'name',
+      compare: (a, b) => {
+        return a.name.localeCompare(b.name);
+      },
+    }),
+    render: (item) => item.name,
+  },
+  {
+    title: 'Age',
+    definition: createTableColumn<Item>({
+      columnId: 'age',
+      compare: (a, b) => {
+        return a.age - b.age;
+      },
+    }),
+    render: (item) => item.age,
+  },
+  {
+    title: 'Address',
+    definition: createTableColumn<Item>({
+      columnId: 'address',
+      compare: (a, b) => {
+        return a.address.localeCompare(b.address);
+      },
+    }),
+    render: (item) => item.address,
+  },
+];
+
 const AppContainer = () => {
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
   const [selectValue, setSelectValue] = useState<string | undefined>(undefined);
+
+  const tableInstance = useTable({
+    pagination: {
+      page: 1,
+      limit: DEFAULT_LIMIT,
+    },
+    sort: {
+      field: 'name',
+      order: SORT_ORDER_ENUM.ASC,
+    },
+  });
+
+  console.log('====tableInstance', tableInstance);
 
   return (
     <div
@@ -49,7 +121,7 @@ const AppContainer = () => {
     >
       <div
         style={{
-          widows: 500,
+          width: 500,
         }}
       >
         <Accordion
@@ -173,6 +245,14 @@ const AppContainer = () => {
         >
           Make toast
         </Button>
+      </div>
+      <div style={{ width: 500 }}>
+        <Table
+          tableInstance={tableInstance}
+          dataSource={dataSource}
+          columns={columns}
+          totalElements={dataSource.length || 0}
+        />
       </div>
     </div>
   );

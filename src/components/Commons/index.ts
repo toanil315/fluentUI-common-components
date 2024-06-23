@@ -14,6 +14,7 @@ export * from './TagPicker';
 export * from './Toast';
 export * from './Switch';
 export * from './Slider';
+export * from './Table';
 
 export * from './Accordion/types';
 export * from './Button/types';
@@ -31,6 +32,7 @@ export * from './TagPicker/types';
 export * from './Toast/types';
 export * from './Switch/types';
 export * from './Slider/types';
+export * from './Table/types';
 
 export * from './Toast/openToast';
 
