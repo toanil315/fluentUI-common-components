@@ -3,7 +3,7 @@ import { Form } from './index';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Button, TagPickerOptionItem } from '@/components/Commons';
+import { Button, TagPickerOptionItem, UPLOADER_ENUM } from '@/components/Commons';
 import { Avatar } from '@fluentui/react-components';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -41,6 +41,7 @@ export const Primary: Story = {
         textarea: '',
         tagPicker: [],
         slider: 50,
+        file: undefined,
       },
       resolver: yupResolver(
         yup.object().shape({
@@ -171,6 +172,15 @@ export const Primary: Story = {
             min={1}
             max={100}
             milestone={3}
+            showMilestoneValue
+          />
+
+          <Form.FileUploader
+            label='Label'
+            required
+            name='file'
+            componentType={UPLOADER_ENUM.DRAG_AND_DROP}
+            multiple
           />
 
           <Button

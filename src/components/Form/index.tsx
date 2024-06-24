@@ -9,6 +9,7 @@ import Switch from './Switch';
 import Textarea from './Textarea';
 import TagPicker from './TagPicker';
 import Slider from './Slider';
+import FileUploader from './FileUploader';
 
 export const Form = ({
   children,
@@ -32,3 +33,4 @@ Form.Switch = Switch;
 Form.Textarea = Textarea;
 Form.TagPicker = TagPicker;
 Form.Slider = Slider;
+Form.FileUploader = FileUploader;

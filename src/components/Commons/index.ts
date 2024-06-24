@@ -15,6 +15,8 @@ export * from './Toast';
 export * from './Switch';
 export * from './Slider';
 export * from './Table';
+export * from './Empty';
+export * from './FileUploader';
 
 export * from './Accordion/types';
 export * from './Button/types';
@@ -33,6 +35,8 @@ export * from './Toast/types';
 export * from './Switch/types';
 export * from './Slider/types';
 export * from './Table/types';
+export * from './Empty/types';
+export * from './FileUploader/types';
 
 export * from './Toast/openToast';
 
