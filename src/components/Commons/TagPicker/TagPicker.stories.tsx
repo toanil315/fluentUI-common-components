@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TagPicker } from '.';
 import { useState } from 'react';
-import { Avatar, Persona, Tag } from '@fluentui/react-components';
+import { Avatar } from '@fluentui/react-components';
 import { TagPickerOptionItem } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

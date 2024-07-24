@@ -4,7 +4,6 @@ import {
   tokens,
   shorthands,
   comboboxClassNames,
-  optionClassNames,
 } from '@fluentui/react-components';
 
 export const useSelectBaseStyles = makeResetStyles({

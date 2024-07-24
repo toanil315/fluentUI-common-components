@@ -1,7 +1,7 @@
 import { RadioGroup, RadioGroupProps } from '@/components/Commons';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const RHFRadioGroup = (props: Omit<RadioGroupProps, 'onChange'> & { name: string }) => {
+const RHFRadioGroup = (props: RadioGroupProps & { name: string }) => {
   const { control } = useFormContext();
 
   return (
@@ -11,6 +11,10 @@ const RHFRadioGroup = (props: Omit<RadioGroupProps, 'onChange'> & { name: string
           error={fieldState.error?.message}
           {...props}
           {...field}
+          onChange={(...event: Parameters<NonNullable<RadioGroupProps['onChange']>>) => {
+            props.onChange && props.onChange(...event);
+            field.onChange(...event);
+          }}
         />
       )}
       name={props.name || ''}

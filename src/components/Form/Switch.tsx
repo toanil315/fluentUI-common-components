@@ -1,7 +1,7 @@
 import { Switch, SwitchProps } from '@/components/Commons';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const RHFSwitch = (props: Omit<SwitchProps, 'onChange'> & { name: string }) => {
+const RHFSwitch = (props: SwitchProps & { name: string }) => {
   const { control } = useFormContext();
 
   return (
@@ -10,6 +10,10 @@ const RHFSwitch = (props: Omit<SwitchProps, 'onChange'> & { name: string }) => {
         <Switch
           {...props}
           {...field}
+          onChange={(...event: Parameters<NonNullable<SwitchProps['onChange']>>) => {
+            props.onChange && props.onChange(...event);
+            field.onChange(...event);
+          }}
         />
       )}
       name={props.name || ''}

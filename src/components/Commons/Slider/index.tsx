@@ -53,8 +53,6 @@ export const Slider = ({
     }, {});
   }, [milestone]);
 
-  console.log(masks);
-
   return (
     <Field
       label={label}
@@ -95,6 +93,7 @@ export const Slider = ({
 
                   return (
                     <div
+                      key={m}
                       className={mileStoneBaseClassName}
                       style={{ left: m + '%' }}
                     >

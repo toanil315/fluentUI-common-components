@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxGroupProps } from '@/components/Commons';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const RHFCheckBoxGroup = (props: Omit<CheckboxGroupProps, 'onChange'> & { name: string }) => {
+const RHFCheckBoxGroup = (props: CheckboxGroupProps & { name: string }) => {
   const { control } = useFormContext();
 
   return (
@@ -11,6 +11,10 @@ const RHFCheckBoxGroup = (props: Omit<CheckboxGroupProps, 'onChange'> & { name: 
           error={fieldState.error?.message}
           {...props}
           {...field}
+          onChange={(...event: Parameters<NonNullable<CheckboxGroupProps['onChange']>>) => {
+            props.onChange && props.onChange(...event);
+            field.onChange(...event);
+          }}
         />
       )}
       name={props.name || ''}

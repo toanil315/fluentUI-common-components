@@ -1,4 +1,4 @@
-import {ButtonProps as FuiButtonProps} from '@fluentui/react-components'
+import { ButtonProps as FuiButtonProps } from '@fluentui/react-components';
 
 type ButtonSize = 'small' | 'medium' | 'large';
 

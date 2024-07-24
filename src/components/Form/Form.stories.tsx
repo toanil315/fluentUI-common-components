@@ -42,6 +42,7 @@ export const Primary: Story = {
         tagPicker: [],
         slider: 50,
         file: undefined,
+        checkBoxGroup: [],
       },
       resolver: yupResolver(
         yup.object().shape({
@@ -120,6 +121,7 @@ export const Primary: Story = {
               { value: 'lucy', label: 'Lucy' },
               { value: 'yiminghe', label: 'Yiminghe' },
             ]}
+            onChange={(v) => console.log('onChange', v)}
           />
           <Form.RadioGroup
             label='Label'
@@ -181,6 +183,17 @@ export const Primary: Story = {
             name='file'
             componentType={UPLOADER_ENUM.DRAG_AND_DROP}
             multiple
+          />
+          <Form.CheckBoxGroup
+            items={[
+              { label: 'Checkbox 1', value: '1' },
+              { label: 'Checkbox 2', value: '2' },
+              { label: 'Checkbox 3', value: '3' },
+            ]}
+            direction='column'
+            onChange={(value) => console.log('onChange', value)}
+            label='Checkbox Group'
+            name='checkBoxGroup'
           />
 
           <Button

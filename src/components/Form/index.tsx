@@ -10,6 +10,7 @@ import Textarea from './Textarea';
 import TagPicker from './TagPicker';
 import Slider from './Slider';
 import FileUploader from './FileUploader';
+import CheckBoxGroup from './CheckBoxGroup';
 
 export const Form = ({
   children,
@@ -34,3 +35,4 @@ Form.Textarea = Textarea;
 Form.TagPicker = TagPicker;
 Form.Slider = Slider;
 Form.FileUploader = FileUploader;
+Form.CheckBoxGroup = CheckBoxGroup;

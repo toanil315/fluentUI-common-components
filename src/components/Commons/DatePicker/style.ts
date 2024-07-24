@@ -1,5 +1,4 @@
 import { makeResetStyles, makeStyles, shorthands, tokens } from '@fluentui/react-components';
-import { datePickerClassNames } from '@fluentui/react-datepicker-compat';
 
 export const useDatePickerBaseStyles = makeResetStyles({
   borderRadius: tokens.borderRadiusMedium,

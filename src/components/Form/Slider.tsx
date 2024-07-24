@@ -1,7 +1,7 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import { Slider, SliderProps } from '../Commons';
 
-const RHFSlider = (props: Omit<SliderProps, 'onChange'> & { name: string }) => {
+const RHFSlider = (props: SliderProps & { name: string }) => {
   const { control } = useFormContext();
 
   return (
@@ -10,6 +10,10 @@ const RHFSlider = (props: Omit<SliderProps, 'onChange'> & { name: string }) => {
         <Slider
           {...props}
           {...field}
+          onChange={(...event: Parameters<NonNullable<SliderProps['onChange']>>) => {
+            props.onChange && props.onChange(...event);
+            field.onChange(...event);
+          }}
         />
       )}
       name={props.name || ''}

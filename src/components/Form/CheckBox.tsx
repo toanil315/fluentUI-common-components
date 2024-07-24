@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxProps } from '@/components/Commons';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const RHFCheckBox = (props: Omit<CheckboxProps, 'onChange'> & { name: string }) => {
+const RHFCheckBox = (props: CheckboxProps & { name: string }) => {
   const { control } = useFormContext();
 
   return (
@@ -11,6 +11,10 @@ const RHFCheckBox = (props: Omit<CheckboxProps, 'onChange'> & { name: string }) 
           error={fieldState.error?.message}
           {...props}
           {...field}
+          onChange={(...event: Parameters<NonNullable<CheckboxProps['onChange']>>) => {
+            props.onChange && props.onChange(...event);
+            field.onChange(...event);
+          }}
         />
       )}
       name={props.name || ''}
